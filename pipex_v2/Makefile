@@ -6,7 +6,7 @@
 #    By: alcarden <alcarden@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 13:24:53 by alcarden          #+#    #+#              #
-#    Updated: 2023/10/17 18:56:00 by alcarden         ###   ########.fr        #
+#    Updated: 2023/10/17 19:17:52 by alcarden         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ $(LIBFT):
 all: 		${PROG}
 
 ${PROG}:	${OBJS}
-					@echo " Compiling libft..."
+					@echo " Compiling...\n"
 					@make re -C ./libft
 					@gcc ${OBJS} $(LIBFT) -o ${PROG}
 					@echo "Pipex Compiled!\n"
