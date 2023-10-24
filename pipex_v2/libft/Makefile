@@ -5,14 +5,12 @@
 #                                                     +:+ +:+         +:+      #
 #    By: alcarden <alcarden@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/04/18 18:01:17 by alcarden          #+#    #+#              #
-#    Updated: 2023/04/27 19:30:49 by alcarden         ###   ########.fr        #
+#    Created: 2023/10/24 19:01:46 by alcarden          #+#    #+#              #
+#    Updated: 2023/10/24 19:34:30 by alcarden         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
-
-CFLAGS = -Wall -Werror -Wextra
+TARGET = $(BIN_DIR)/libft.a
 
 FILES = ft_atoi.c\
 		ft_isalnum.c\
@@ -47,11 +45,8 @@ FILES = ft_atoi.c\
 		ft_putendl_fd.c\
 		ft_putnbr_fd.c\
 		ft_itoa.c\
-		ft_split.c
-
-OBJ = $(FILES:.c=.o)
-
-BONUS = ft_lstnew_bonus.c\
+		ft_split.c\
+		ft_lstnew_bonus.c\
 		ft_lstadd_front_bonus.c\
 		ft_lstsize_bonus.c\
 		ft_lstlast_bonus.c\
@@ -61,28 +56,35 @@ BONUS = ft_lstnew_bonus.c\
 		ft_lstiter_bonus.c\
 		ft_lstmap_bonus.c
 
-BOBJECTS=$(BONUS:.c=.o)
+OBJS = $(addprefix $(OBJ_DIR)/,$(FILES:%.c=%.o))
 
-FLAGS = -Wall -Wextra -Werror
+INC_DIR = ./inc
+OBJ_DIR = ./obj
+SRC_DIR = ./src
+BIN_DIR = ./bin
 
-all :$(NAME)
+CFLAGS = -Wall -Wextra -Werror
 
-$(NAME) : $(OBJ)
-	@ar rcs $(NAME) $(OBJ)
+$(TARGET): $(OBJS)
+	mkdir -p $(BIN_DIR)
+	ar rcs $(TARGET) $^
 
-$(OBJ) : $(FILES)
-	@gcc $(FLAGS) -c $(FILES)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	mkdir -p $(OBJ_DIR)
+	gcc $(CFLAGS) -I$(INC_DIR) -c $< -o $@
 
-bonus:
-	@gcc $(FLAGS) -c $(BONUS)
-	@ar rcs $(NAME) $(BOBJECTS)
+.PHONY: all clean fclean re
+
+all: $(TARGET)
 
 clean:
-	@rm -f $(OBJ) $(BOBJECTS)
+	@if [ -d $(OBJ_DIR) ]; then \
+		rm -r $(OBJ_DIR); \
+	fi
 
-fclean:
-	@rm -f $(NAME) $(OBJ) $(BOBJECTS)
+fclean: clean
+	@if [ -d $(BIN_DIR) ]; then \
+		rm -r $(BIN_DIR); \
+	fi
 
 re: fclean all
-
-.PHONY: re all fclean clean bonus

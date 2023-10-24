@@ -6,16 +6,13 @@
 /*   By: alcarden <alcarden@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:25:00 by alcarden          #+#    #+#             */
-/*   Updated: 2023/10/17 18:56:24 by alcarden         ###   ########.fr       */
+/*   Updated: 2023/10/24 20:01:33 by alcarden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-/* Función que buscará la línea de ruta dentro del entorno, se
- dividirá y probará cada ruta de comando y luego devolverá la correcta. */
-
-char	*find_path(char *cmd, char **envp)
+char	*ft_find_path(char *cmd, char **envp)
 {
 	char	**paths;
 	char	*path;
@@ -46,16 +43,13 @@ char	*find_path(char *cmd, char **envp)
 
 /* Función error.*/
 
-void	error(void)
+void	ft_error(void)
 {
-	perror("Error");
+	perror("Pipex");
 	exit(EXIT_FAILURE);
 }
 
-/* Función que toma el comando y lo envía a find_path
- antes de ejecutarlo.*/
-
-void	execute(char *argv, char **envp)
+void	ft_execute(char *argv, char **envp)
 {
 	char	**cmd;
 	int		i;
@@ -63,14 +57,14 @@ void	execute(char *argv, char **envp)
 
 	i = -1;
 	cmd = ft_split(argv, ' ');
-	path = find_path(cmd[0], envp);
+	path = ft_find_path(cmd[0], envp);
 	if (!path)
 	{
 		while (cmd[++i])
 			free(cmd[i]);
 		free(cmd);
-		error();
+		ft_error();
 	}
 	execve(path, cmd, envp);
-	error();
+	ft_error();
 }

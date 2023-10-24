@@ -1,47 +1,47 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: alcarden <alcarden@student.42malaga.com    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/17 13:24:53 by alcarden          #+#    #+#              #
-#    Updated: 2023/10/17 19:17:52 by alcarden         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+TARGET = $(BIN_DIR)/pipex
 
-PROG	= pipex
-SRC 	= src/pipex.c src/utils.c
-OBJS 	= ${SRC:.c=.o}
-MAIN	= src/pipex.c
-LIBFT 	= libft/libft.a
-CFLAGS 	= -Wall -Wextra -Werror -g
+FILES = pipex.c \
+		utils.c
+
+BIN_DIR = ./bin
+LIBFT_DIR = ./libft
+LIBFT_INC = $(LIBFT_DIR)/inc
+LIBFT = $(LIBFT_DIR)/bin/libft.a
+
+OBJS = $(addprefix $(OBJ_DIR)/,$(FILES:%.c=%.o))
+
+INC_DIR = ./inc
+OBJ_DIR = ./obj
+SRC_DIR = ./src
+INCLUDES = -I$(INC_DIR) -I$(LIBFT_INC)
+CFLAGS =  -Wall -Wextra -Werror
 
 
-src/%.o : src/%.c
-	gcc $(CFLAGS) -c $< -o $@
+$(TARGET): $(OBJS) $(LIBFT)
+	mkdir -p $(BIN_DIR)
+	gcc $(CFLAGS) $(INCLUDES) $^ -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	mkdir -p $(OBJ_DIR)
+	gcc $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(LIBFT):
-	@make -C libft
+	$(MAKE) -C $(LIBFT_DIR)
 
-all: 		${PROG}
+.PHONY: all clean fclean re run checker lines
 
-${PROG}:	${OBJS}
-					@echo " Compiling...\n"
-					@make re -C ./libft
-					@gcc ${OBJS} $(LIBFT) -o ${PROG}
-					@echo "Pipex Compiled!\n"
+all: $(LIBFT) $(TARGET)
 
 clean:
-					@make clean -C ./libft
-					@rm -f ${OBJS} ${OBJS_B}
+	@if [ -d $(OBJ_DIR) ]; then \
+		rm -r $(OBJ_DIR); \
+	fi
+	$(MAKE) -C $(LIBFT_DIR) clean
 
-fclean: 	clean
-					@make fclean -C ./libft
-					@rm -f $(NAME)
-					@rm -f ${PROG}
-					@echo "Deleting EVERYTHING!\n"
+fclean: clean
+	@if [ -d $(BIN_DIR) ]; then \
+		rm -r $(BIN_DIR); \
+	fi
+	$(MAKE) -C $(LIBFT_DIR) fclean
 
-re:			fclean all
-
-.PHONY: all clean fclean re
+re: fclean all
