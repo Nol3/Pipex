@@ -6,7 +6,7 @@
 /*   By: alcarden <alcarden@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:25:00 by alcarden          #+#    #+#             */
-/*   Updated: 2023/10/24 20:01:33 by alcarden         ###   ########.fr       */
+/*   Updated: 2023/10/24 21:31:41 by alcarden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ char	*ft_find_path(char *cmd, char **envp)
 		free(path);
 		i++;
 	}
-	i = -1;
-	while (paths[++i])
+	i = 0;
+	while (paths[i++])
 		free(paths[i]);
 	free(paths);
 	return (0);
@@ -55,12 +55,12 @@ void	ft_execute(char *argv, char **envp)
 	int		i;
 	char	*path;
 
-	i = -1;
+	i = 0;
 	cmd = ft_split(argv, ' ');
 	path = ft_find_path(cmd[0], envp);
 	if (!path)
 	{
-		while (cmd[++i])
+		while (cmd[i++])
 			free(cmd[i]);
 		free(cmd);
 		ft_error();
