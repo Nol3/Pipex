@@ -28,7 +28,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
 
-.PHONY: all clean fclean re run checker lines
+.PHONY: all clean fclean re
 
 all: $(LIBFT) $(TARGET)
 
