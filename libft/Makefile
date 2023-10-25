@@ -6,7 +6,7 @@
 #    By: alcarden <alcarden@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 19:01:46 by alcarden          #+#    #+#              #
-#    Updated: 2023/10/24 19:34:30 by alcarden         ###   ########.fr        #
+#    Updated: 2023/10/25 19:37:32 by alcarden         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,17 @@ FILES = ft_atoi.c\
 		ft_lstdelone_bonus.c\
 		ft_lstclear_bonus.c\
 		ft_lstiter_bonus.c\
-		ft_lstmap_bonus.c
+		ft_lstmap_bonus.c\
+		ft_char_str.c\
+		ft_decimals.c\
+		ft_nums.c\
+		ft_printf.c\
+		ft_ptr.c\
+		ft_put_hex.c\
+		get_next_line.c\
+		get_next_line_utils.c\
+		get_next_line_bonus.c\
+		get_next_line_utils_bonus.c\
 
 OBJS = $(addprefix $(OBJ_DIR)/,$(FILES:%.c=%.o))
 

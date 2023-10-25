@@ -6,7 +6,7 @@
 /*   By: alcarden <alcarden@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:25:12 by alcarden          #+#    #+#             */
-/*   Updated: 2023/10/24 20:02:04 by alcarden         ###   ########.fr       */
+/*   Updated: 2023/10/25 20:22:18 by alcarden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ int	main(int argc, char **argv, char **envp)
 	}
 	else
 	{
-		ft_putstr_fd("Pipex_Error: Bad arguments\n", 2);
-		ft_putstr_fd("Example: ./pipex <file1> <cmd1> <cmd2> <file2>\n", 1);
+		ft_printf("Pipex_Error: Bad arguments\n", 2);
+		ft_printf("Example: ./pipex <file1> <cmd1> <cmd2> <file2>\n", 1);
 	}
 	return (0);
 }

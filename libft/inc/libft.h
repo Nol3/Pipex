@@ -6,7 +6,7 @@
 /*   By: alcarden <alcarden@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 13:16:41 by alcarden          #+#    #+#             */
-/*   Updated: 2023/04/27 19:30:38 by alcarden         ###   ########.fr       */
+/*   Updated: 2023/10/25 19:34:41 by alcarden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
+# include <stdarg.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
+
+# ifndef FD_MAX
+#  define FD_MAX 1024
+# endif
 
 typedef struct s_list
 {
@@ -66,5 +76,28 @@ void		ft_lstclear(t_list **lst, void (*del)(void *));
 void		ft_lstiter(t_list *lst, void (*f)(void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 char		**ft_split(char const *s, char c);
+
+// printf
+
+int			ft_printf(char const *str, ...);
+int			ft_count_chars(const char *str);
+int			ft_check_format(va_list params, char c);
+int			ft_putchar(char c);
+int			ft_putstr(char *str);
+int			ft_putptr(long unsigned int ptr);
+int			ft_puthexp(long unsigned int ptr, int num);
+int			ft_count_hex(long unsigned int num);
+int			ft_putnbr(int num);
+int			ft_count_digits(int num);
+int			ft_digitsu(unsigned int num);
+int			ft_putud(unsigned int num);
+int			ft_puthex(char c, unsigned int num);
+
+//get_next_line
+
+char		*ft_get_line(char *stack);
+char		*ft_stack_refill(char *stack);
+char		*ft_read_file(char *stack, int fd);
+char		*get_next_line(int fd);
 
 #endif

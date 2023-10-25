@@ -6,7 +6,7 @@
 /*   By: alcarden <alcarden@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:25:00 by alcarden          #+#    #+#             */
-/*   Updated: 2023/10/25 16:29:14 by alcarden         ###   ########.fr       */
+/*   Updated: 2023/10/25 20:18:33 by alcarden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,30 @@
 
 char	*ft_find_path(char *cmd, char **envp)
 {
-	char	**paths;
+	char	**all_paths;
 	char	*path;
 	int		i;
-	char	*part_path;
+	char	*routes;
 
 	i = 0;
 	while (ft_strnstr(envp[i], "PATH", 4) == 0)
 		i++;
-	paths = ft_split(envp[i] + 5, ':');
+	all_paths = ft_split(envp[i] + 5, ':');
 	i = 0;
-	while (paths[i])
+	while (all_paths[i])
 	{
-		part_path = ft_strjoin(paths[i], "/");
-		path = ft_strjoin(part_path, cmd);
-		free(part_path);
+		routes = ft_strjoin(all_paths[i], "/");
+		path = ft_strjoin(routes, cmd);
+		free(routes);
 		if (access(path, F_OK) == 0)
 			return (path);
 		free(path);
 		i++;
 	}
 	i = 0;
-	while (paths[i++])
-		free(paths[i]);
-	free(paths);
+	while (all_paths[i++])
+		free(all_paths[i]);
+	free(all_paths);
 	return (0);
 }
 
