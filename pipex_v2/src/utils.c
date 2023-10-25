@@ -6,7 +6,7 @@
 /*   By: alcarden <alcarden@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:25:00 by alcarden          #+#    #+#             */
-/*   Updated: 2023/10/24 21:31:41 by alcarden         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:29:14 by alcarden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ char	*ft_find_path(char *cmd, char **envp)
 	return (0);
 }
 
-/* Función error.*/
-
 void	ft_error(void)
 {
 	perror("Pipex");
@@ -58,6 +56,7 @@ void	ft_execute(char *argv, char **envp)
 	i = 0;
 	cmd = ft_split(argv, ' ');
 	path = ft_find_path(cmd[0], envp);
+	execve(path, cmd, envp);
 	if (!path)
 	{
 		while (cmd[i++])
@@ -65,6 +64,5 @@ void	ft_execute(char *argv, char **envp)
 		free(cmd);
 		ft_error();
 	}
-	execve(path, cmd, envp);
 	ft_error();
 }

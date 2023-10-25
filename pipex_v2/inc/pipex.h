@@ -6,7 +6,7 @@
 /*   By: alcarden <alcarden@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:25:22 by alcarden          #+#    #+#             */
-/*   Updated: 2023/10/24 20:01:39 by alcarden         ###   ########.fr       */
+/*   Updated: 2023/10/25 15:46:19 by alcarden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,17 @@
  *
  */
 void	ft_error(void);
+
 /**
  * @brief funcion que encuentra la ruta del comando
  * Función que buscará la línea de ruta dentro del entorno, se
    dividirá y probará cada ruta de comando y luego devolverá la correcta.
  *
- * @param argv
+ * @param cmd //comando limpio con split. (argv[2])
  * @param envp
  */
 char	*ft_find_path(char *cmd, char **envp);
+
 /**
  * @brief funcion que ejecuta el comando
  *
@@ -45,6 +47,7 @@ char	*ft_find_path(char *cmd, char **envp);
  * @param envp
  */
 void	ft_execute(char *argv, char **envp);
+
 /**
  * @brief funcion que ejecuta el proceso hijo
  * Proceso hijo que se ejecuta dentro de un fork, toma el filein, pone la
@@ -55,6 +58,7 @@ void	ft_execute(char *argv, char **envp);
  * @param fd
  */
 void	ft_child_process(char **argv, char **envp, int *fd);
+
 /**
  * @brief funcion que ejecuta el proceso padre
  *
