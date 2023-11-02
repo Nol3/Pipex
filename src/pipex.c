@@ -6,7 +6,7 @@
 /*   By: alcarden <alcarden@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 13:25:12 by alcarden          #+#    #+#             */
-/*   Updated: 2023/10/25 20:22:18 by alcarden         ###   ########.fr       */
+/*   Updated: 2023/10/25 20:24:10 by alcarden         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 void	ft_child_process(char **argv, char **envp, int *fd)
 {
-	int		filein;
+	int		file_in;
 
-	filein = open(argv[1], O_RDONLY, 0777);
-	if (filein == -1)
+	file_in = open(argv[1], O_RDONLY, 0777);
+	if (file_in == -1)
 		ft_error();
 	dup2(fd[1], STDOUT_FILENO);
-	dup2(filein, STDIN_FILENO);
+	dup2(file_in, STDIN_FILENO);
 	close(fd[0]);
 	ft_execute(argv[2], envp);
 }
 
 void	ft_parent_process(char **argv, char **envp, int *fd)
 {
-	int		fileout;
+	int		file_out;
 
-	fileout = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	if (fileout == -1)
+	file_out = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0777);
+	if (file_out == -1)
 		ft_error();
 	dup2(fd[0], STDIN_FILENO);
-	dup2(fileout, STDOUT_FILENO);
+	dup2(file_out, STDOUT_FILENO);
 	close(fd[1]);
 	ft_execute(argv[3], envp);
 }
